@@ -1,0 +1,51 @@
+\input{figures/common/dof_colors.tikz}
+
+\newcommand{\defTwoCellMesh}{%
+  \tkzDefPoint(0,2){v0}
+  \tkzDefPoint(3,4){v1}
+  \tkzDefPoint(3,0){v2}
+  \tkzDefPoint(6,2){v3}
+  \tkzDefBarycentricPoint(v0=1,v1=1)\tkzGetPoint{e0}
+  \tkzDefBarycentricPoint(v0=1,v2=1)\tkzGetPoint{e1}
+  \tkzDefBarycentricPoint(v1=1,v2=1)\tkzGetPoint{e2}
+  \tkzDefBarycentricPoint(v1=1,v3=1)\tkzGetPoint{e3}
+  \tkzDefBarycentricPoint(v2=1,v3=1)\tkzGetPoint{e4}
+  \tkzDefBarycentricPoint(v0=1,v1=1,v2=1)\tkzGetPoint{c0}
+  \tkzDefBarycentricPoint(v1=1,v2=1,v3=1)\tkzGetPoint{c1}
+}
+
+\newcommand{\drawTwoCellMesh}{%
+  \tkzDrawSegments[edge](v0,v1 v0,v2 v1,v2 v1,v3 v2,v3)
+}
+
+\newcommand{\labelTwoCellMesh}{%
+  \tkzLabelPoint[left](c0){$c_0$}
+  \tkzLabelPoint[right](c1){$c_1$}
+
+  \tkzLabelPoint[above left](e0){$e_0$}
+  \tkzLabelPoint[below left](e1){$e_1$}
+  \tkzLabelPoint[left](e2){$e_2$}
+  \tkzLabelPoint[above right](e3){$e_3$}
+  \tkzLabelPoint[below right](e4){$e_4$}
+
+  \tkzLabelPoint[left](v0){$v_0$}
+  \tkzLabelPoint[above](v1){$v_1$}
+  \tkzLabelPoint[below](v2){$v_2$}
+  \tkzLabelPoint[right](v3){$v_3$}
+}
+
+\newcommand{\labelTwoCellMeshPlex}{%
+  \tkzLabelPoint[left](c0){0}
+  \tkzLabelPoint[right](c1){1}
+
+  \tkzLabelPoint[above left](e0){6}
+  \tkzLabelPoint[below left](e1){7}
+  \tkzLabelPoint[left](e2){8}
+  \tkzLabelPoint[above right](e3){9}
+  \tkzLabelPoint[below right](e4){10}
+
+  \tkzLabelPoint[left](v0){2}
+  \tkzLabelPoint[above](v1){3}
+  \tkzLabelPoint[below](v2){4}
+  \tkzLabelPoint[right](v3){5}
+}

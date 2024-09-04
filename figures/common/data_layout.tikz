@@ -1,0 +1,100 @@
+\input{figures/common/dof_colors.tikz}
+
+\tikzstyle {background} = [lightgray];
+\tikzstyle{ptlabel} = [anchor=center,color=black,opacity=1]
+\tikzstyle{connector} = [densely dashed]
+
+\newcommand{\drawBox}[5]{
+  \filldraw[draw=black,fill=#5,line width=.7pt] #1 rectangle #2;
+  \node [at={#3},fill=#5] {#4};
+}
+
+\newcommand{\drawBoxNew}[3]{
+  \filldraw[draw=black,fill=#3,line width=.7pt] #1 rectangle #2;
+}
+
+\newcommand{\drawBoxNewNew}[3]{
+  \filldraw[draw=black,fill=#3,line width=.7pt] (#1,\yshift) rectangle ++ (#2,1);
+}
+
+\newcommand{\labelBox}[3]{
+  \node [at={#1},fill=#3,inner sep=2pt,minimum width=0pt] {#2};
+}
+
+\newcommand{\labelBoxNew}[3]{
+  \node [at={(#1,\yshift+.5)},fill=#3,inner sep=2pt,minimum width=0pt] {#2};
+}
+
+\newcommand{\drawDof}[3]{%
+  \filldraw[draw=black,fill=#3,line width=.7pt] #1 rectangle ++ (1,1);
+  \node [at={($#1+(.5,.5)$)}] {#2};
+}
+
+\newcommand{\drawHaloDof}[3]{%
+  \filldraw[draw=black,fill=#3,line width=.7pt] #1 rectangle ++ (1,1);
+  \draw[draw=black,line width=.7pt,pattern=north west lines] #1 rectangle ++ (1,1);
+  \node [at={($#1+(.5,.5)$)},fill=#3] {#2};
+}
+
+\newcommand{\drawHaloBox}[2]{
+  \draw[draw=black,line width=.7pt,pattern=north west lines] (#1,\yshift) rectangle ++ (#2,1);
+}
+
+\newcommand{\drawCellDof}[2]{%
+  \drawDof{#1}{#2}{bgcelldofcolor};
+}
+
+\newcommand{\drawCellDofHalo}[2]{%
+  \drawHaloDof{#1}{#2}{bgcelldofcolor};
+}
+
+\newcommand{\drawEdgeDof}[2]{%
+  \drawDof{#1}{#2}{bgedgedofcolor};
+}
+
+\newcommand{\drawEdgeDofHalo}[2]{%
+  \drawHaloDof{#1}{#2}{bgedgedofcolor};
+}
+
+\newcommand{\drawVertDof}[2]{%
+  \drawDof{#1}{#2}{bgvertdofcolor};
+}
+
+\newcommand{\drawVertDofHalo}[2]{%
+  \drawHaloDof{#1}{#2}{bgvertdofcolor};
+}
+
+\newcommand{\drawNodeDof}[2]{%
+  \drawDof{#1}{#2}{bgnodedofcolor};
+}
+
+\newcommand{\drawWhiteDof}[2]{%
+  \drawDof{#1}{#2}{white};
+}
+
+\newcommand{\drawWhiteDofSmall}[2]{%
+  \drawDof{#1}{\footnotesize{#2}}{white};
+}
+
+\newcommand{\drawDofSmall}[3]{%
+  \drawDof{#1}{\footnotesize{#2}}{#3};
+}
+
+% https://tex.stackexchange.com/questions/123760/draw-crosses-in-tikz
+\tikzset{cross/.style={cross out,draw=black,minimum size=8pt,inner sep=0pt,outer sep=0pt,line width=1.5pt}};
+
+\newcommand{\drawCross}[1]{
+  \draw #1 node[cross] {};
+}
+
+\newcommand{\drawComma}[1]{
+  \node [font=\huge] at #1 {,};
+}
+
+\newcommand{\drawConnector}[2]{
+  \draw [connector] #1 -- #2;
+}
+
+\newcommand{\labelLayoutAxis}[1]{
+  \node [at={(-1.8,\yshift+.5)},fill=none] {#1};
+}

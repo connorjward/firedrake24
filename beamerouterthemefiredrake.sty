@@ -1,0 +1,143 @@
+%%
+%% This is file `beamerouterthemefiredrake.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% beamerouterthemefiredrake.dtx  (with options: `package')
+%% ---------------------------------------------------------------------------
+%% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+%% contributors can be found at
+%% 
+%%     https://github.com/matze/mtheme/graphs/contributors
+%% 
+%% and the original template was based on the HSRM theme by Benjamin Weiss.
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemefiredrake}[2016/03/14 Firedrake outer theme]
+\RequirePackage{etoolbox}
+\RequirePackage{calc}
+\RequirePackage{pgfopts}
+\pgfkeys{
+  /firedrake/outer/numbering/.cd,
+    .is choice,
+    none/.code=\setbeamertemplate{frame numbering}[none],
+    counter/.code=\setbeamertemplate{frame numbering}[counter],
+    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+}
+\pgfkeys{
+  /firedrake/outer/progressbar/.cd,
+    .is choice,
+    none/.code={%
+      \setbeamertemplate{headline}[plain]
+      \setbeamertemplate{frametitle}[plain]
+      \setbeamertemplate{footline}[plain]
+    },
+    head/.code={\pgfkeys{/firedrake/outer/progressbar=none}
+      \addtobeamertemplate{headline}{}{%
+        \usebeamertemplate*{progress bar in head/foot}
+      }
+    },
+    frametitle/.code={\pgfkeys{/firedrake/outer/progressbar=none}
+      \addtobeamertemplate{frametitle}{}{%
+        \usebeamertemplate*{progress bar in head/foot}
+      }
+    },
+    foot/.code={\pgfkeys{/firedrake/outer/progressbar=none}
+      \addtobeamertemplate{footline}{}{%
+        \usebeamertemplate*{progress bar in head/foot}%
+      }
+    },
+}
+\newcommand{\firedrake@outer@setdefaults}{
+  \pgfkeys{/firedrake/outer/.cd,
+    numbering=counter,
+    progressbar=none,
+  }
+}
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate{frame footer}{none}{}
+\defbeamertemplate{frame footer}{custom}[1]{ #1 }
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{\insertframenumber}
+\defbeamertemplate{frame numbering}{fraction}{
+  \insertframenumber/\inserttotalframenumber
+}
+\defbeamertemplate{headline}{plain}{}
+\defbeamertemplate{footline}{plain}{%
+  \begin{beamercolorbox}[wd=\textwidth, sep=1ex]{footline}%
+    \usebeamerfont{page number in head/foot}%
+    \usebeamertemplate*{frame footer}
+    \usebeamertemplate*{frame numbering}
+    \hfill%
+  \end{beamercolorbox}%
+}
+\newlength{\firedrake@frametitle@padding}
+\setlength{\firedrake@frametitle@padding}{2.2ex}
+\newlength{\firedrake@frametitle@paddingend}
+\setlength{\firedrake@frametitle@paddingend}{1mm}
+\newcommand{\firedrake@frametitlestrut@start}{
+  \rule{0pt}{\firedrake@frametitle@padding +%
+    \totalheightof{%
+      \ifcsdef{firedrake@frametitleformat}{\firedrake@frametitleformat X}{X}%
+    }%
+  }%
+}
+\newcommand{\firedrake@frametitlestrut@end}{
+  \rule[-\firedrake@frametitle@padding]{0pt}{\firedrake@frametitle@padding}
+}
+\defbeamertemplate{frametitle}{plain}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[%
+      wd=\paperwidth,%
+      sep=0pt,%
+      leftskip=\firedrake@frametitle@padding,%
+      rightskip=\firedrake@frametitle@paddingend,%
+    ]{frametitle}%
+  \firedrake@frametitlestrut@start%
+  \insertframetitle%
+  \nolinebreak%
+  \firedrake@frametitlestrut@end%
+  \hfill
+  \raisebox{-2.75mm}[0pt][0pt]{%
+    \includegraphics[height=8.5mm]{firedrake-small.pdf}%
+  }%
+  \end{beamercolorbox}%
+}
+\newlength{\firedrake@progressinheadfoot}
+\setbeamertemplate{progress bar in head/foot}{
+  \nointerlineskip
+  \setlength{\firedrake@progressinheadfoot}{%
+    \paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+  }%
+  \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+    \begin{tikzpicture}
+      \fill[bg] (0,0) rectangle (\paperwidth, 0.4pt);
+      \fill[fg] (0,0) rectangle (\firedrake@progressinheadfoot, 0.4pt);
+    \end{tikzpicture}%
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{background}{%
+  \raisebox{-\paperheight}[0pt][0pt]{%
+    \makebox[\paperwidth][c]{%
+      \includegraphics[width=\paperwidth]{bottom-swoosh.png}%
+    }%
+  }%
+}
+\AtBeginDocument{%
+  \apptocmd{\appendix}{%
+    \pgfkeys{%
+      /firedrake/outer/.cd,
+      numbering=none,
+      progressbar=none}
+    }{}{}
+}
+\firedrake@outer@setdefaults
+\ProcessPgfPackageOptions{/firedrake/outer}
+\endinput
+%%
+%% End of file `beamerouterthemefiredrake.sty'.

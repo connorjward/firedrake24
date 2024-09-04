@@ -1,0 +1,395 @@
+\input{figures/common/dof_colors.tikz}
+
+\newcommand{\defMeshOne}{
+  \tkzDefPoint(0,0){p1v0}
+  \tkzDefPoint(.1,1.1){p1v1}
+  \tkzDefPoint(0,1.9){p1v2}
+  \tkzDefPoint(.2,3.1){p1v3}
+  \tkzDefPoint(1.1,0){p1v4}
+  \tkzDefPoint(1,1){p1v5}
+  \tkzDefPoint(.9,2){p1v6}
+  \tkzDefPoint(1,3){p1v7}
+  \tkzDefPoint(2,0){p1v8}
+  \tkzDefPoint(2.1,1){p1v9}
+  \tkzDefPoint(2,2.1){p1v10}
+  \tkzDefPoint(1.9,3.2){p1v11}
+  \tkzDefPoint(3,-.1){p1v12}
+  \tkzDefPoint(3.1,.9){p1v13}
+  \tkzDefPoint(3,2.1){p1v14}
+  \tkzDefPoint(3.1,3.1){p1v15}
+
+  \tkzDefBarycentricPoint(p1v0=1,p1v1=1,p1v4=1) \tkzGetPoint{p1c0}
+  \tkzDefBarycentricPoint(p1v1=1,p1v4=1,p1v5=1) \tkzGetPoint{p1c1}
+  \tkzDefBarycentricPoint(p1v1=1,p1v5=1,p1v6=1) \tkzGetPoint{p1c2}
+  \tkzDefBarycentricPoint(p1v1=1,p1v2=1,p1v6=1) \tkzGetPoint{p1c3}
+  \tkzDefBarycentricPoint(p1v2=1,p1v3=1,p1v6=1) \tkzGetPoint{p1c4}
+  \tkzDefBarycentricPoint(p1v3=1,p1v6=1,p1v7=1) \tkzGetPoint{p1c5}
+  \tkzDefBarycentricPoint(p1v4=1,p1v8=1,p1v9=1) \tkzGetPoint{p1c6}
+  \tkzDefBarycentricPoint(p1v4=1,p1v5=1,p1v9=1) \tkzGetPoint{p1c7}
+  \tkzDefBarycentricPoint(p1v5=1,p1v10=1,p1v9=1) \tkzGetPoint{p1c8}
+  \tkzDefBarycentricPoint(p1v5=1,p1v6=1,p1v10=1) \tkzGetPoint{p1c9}
+  \tkzDefBarycentricPoint(p1v6=1,p1v7=1,p1v10=1) \tkzGetPoint{p1c10}
+  \tkzDefBarycentricPoint(p1v7=1,p1v11=1,p1v10=1) \tkzGetPoint{p1c11}
+  \tkzDefBarycentricPoint(p1v8=1,p1v9=1,p1v12=1) \tkzGetPoint{p1c12}
+  \tkzDefBarycentricPoint(p1v9=1,p1v10=1,p1v14=1) \tkzGetPoint{p1c13}
+  \tkzDefBarycentricPoint(p1v10=1,p1v11=1,p1v15=1) \tkzGetPoint{p1c14}
+}
+
+\newcommand{\defMeshTwo}{
+  \tkzDefPoint(0,0){p2v0}
+  \tkzDefPoint(.1,1){p2v1}
+  \tkzDefPoint(0,2.1){p2v2}
+  \tkzDefPoint(-.1,3.2){p2v3}
+  \tkzDefPoint(1,-.1){p2v4}
+  \tkzDefPoint(1.1,.9){p2v5}
+  \tkzDefPoint(1,2.1){p2v6}
+  \tkzDefPoint(1.1,3.1){p2v7}
+  \tkzDefPoint(2,-.1){p2v8}
+  \tkzDefPoint(2,1.1){p2v9}
+  \tkzDefPoint(2.1,2){p2v10}
+  \tkzDefPoint(2,2.9){p2v11}
+  \tkzDefPoint(3,.1){p2v12}
+  \tkzDefPoint(3.1,1){p2v13}
+  \tkzDefPoint(2.9,2){p2v14}
+  \tkzDefPoint(2.9,3.1){p2v15}
+
+  \tkzDefBarycentricPoint(p2v0=1,p2v1=1,p2v4=1) \tkzGetPoint{p2c0}
+  \tkzDefBarycentricPoint(p2v1=1,p2v4=1,p2v5=1) \tkzGetPoint{p2c1}
+  \tkzDefBarycentricPoint(p2v1=1,p2v5=1,p2v6=1) \tkzGetPoint{p2c2}
+  \tkzDefBarycentricPoint(p2v7=1,p2v2=1,p2v6=1) \tkzGetPoint{p2c3}
+  \tkzDefBarycentricPoint(p2v2=1,p2v3=1,p2v7=1) \tkzGetPoint{p2c4}
+  \tkzDefBarycentricPoint(p2v2=1,p2v3=1,p2v7=1) \tkzGetPoint{p2c5}
+  \tkzDefBarycentricPoint(p2v4=1,p2v8=1,p2v5=1) \tkzGetPoint{p2c6}
+  \tkzDefBarycentricPoint(p2v8=1,p2v5=1,p2v9=1) \tkzGetPoint{p2c7}
+  \tkzDefBarycentricPoint(p2v5=1,p2v6=1,p2v9=1) \tkzGetPoint{p2c8}
+  \tkzDefBarycentricPoint(p2v9=1,p2v6=1,p2v10=1) \tkzGetPoint{p2c9}
+  \tkzDefBarycentricPoint(p2v6=1,p2v11=1,p2v10=1) \tkzGetPoint{p2c10}
+  \tkzDefBarycentricPoint(p2v7=1,p2v6=1,p2v11=1) \tkzGetPoint{p2c11}
+  \tkzDefBarycentricPoint(p2v8=1,p2v9=1,p2v12=1) \tkzGetPoint{p2c12}
+  \tkzDefBarycentricPoint(p2v9=1,p2v13=1,p2v12=1) \tkzGetPoint{p2c13}
+  \tkzDefBarycentricPoint(p2v9=1,p2v10=1,p2v13=1) \tkzGetPoint{p2c14}
+  \tkzDefBarycentricPoint(p2v10=1,p2v13=1,p2v14=1) \tkzGetPoint{p2c15}
+  \tkzDefBarycentricPoint(p2v10=1,p2v14=1,p2v15=1) \tkzGetPoint{p2c16}
+  \tkzDefBarycentricPoint(p2v10=1,p2v11=1,p2v15=1) \tkzGetPoint{p2c17}
+}
+
+\newcommand{\drawCell}[4]{
+  \tkzDrawPolygon[draw=white,line width=5,fill=#4](#1,#2,#3)
+}
+
+\newcommand{\drawCellOne}[3]{
+  \ifthenelse{\splitMeshFormat = 0}{\drawCell{#1}{#2}{#3}{red!68}}{}
+}
+
+\newcommand{\drawCellOneGhost}[3]{
+  \ifthenelse{\splitMeshFormat = 0}{\drawCell{#1}{#2}{#3}{red!34}}{}
+}
+
+\newcommand{\drawCellTwo}[3]{
+  \ifthenelse{\splitMeshFormat = 0}{\drawCell{#1}{#2}{#3}{blue!68}}{}
+}
+
+\newcommand{\drawCellTwoGhost}[3]{
+  \ifthenelse{\splitMeshFormat = 0}{\drawCell{#1}{#2}{#3}{blue!34}}{}
+}
+
+\newcommand{\drawEdgeLagrange}[2]{
+  \tkzDrawSegments[line width=1pt,draw=black](#1,#2)
+  \tkzDefBarycentricPoint(#1=1,#2=1)\tkzGetPoint{p0}
+  \tkzDrawPoint[draw=edgedofcolor,fill=edgedofcolor,size=6](p0)
+}
+
+\newcommand{\drawEdgeLagrangeRoot}[2]{
+  \tkzDrawSegments[line width=1pt,draw=black](#1,#2)
+  \tkzDefBarycentricPoint(#1=1,#2=1)\tkzGetPoint{p0}
+  \tkzDrawPoint[diamond,draw=edgedofcolor,fill=edgedofcolor,size=8](p0)
+}
+
+\newcommand{\drawEdgeLagrangeLeaf}[2]{
+  \tkzDrawSegments[line width=1pt,draw=black](#1,#2)
+  \tkzDefBarycentricPoint(#1=1,#2=1)\tkzGetPoint{p0}
+  \tkzDrawPoint[diamond,draw=edgedofcolor,fill=white,size=8,line width=1pt](p0)
+}
+
+\newcommand{\drawEdge}[3]{
+  \tkzDrawSegments[line width=2,shorten >=.2cm,shorten <=.2cm,draw=#3](#1,#2)
+}
+
+\newcommand{\drawEdgeOne}[2]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawEdge{#1}{#2}{red!80}}
+    {\drawEdgeLagrange{#1}{#2}}
+}
+
+\newcommand{\drawEdgeOneRoot}[2]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawEdge{#1}{#2}{red!40}}
+    {\drawEdgeLagrangeRoot{#1}{#2}}
+}
+
+\newcommand{\drawEdgeOneLeaf}[2]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawEdgeTwoRoot{#1}{#2}}
+    {\drawEdgeLagrangeLeaf{#1}{#2}}
+}
+
+\newcommand{\drawEdgeTwo}[2]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawEdge{#1}{#2}{blue!80}}
+    {\drawEdgeLagrange{#1}{#2}}
+}
+
+\newcommand{\drawEdgeTwoRoot}[2]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawEdge{#1}{#2}{blue!40}}
+    {\drawEdgeLagrangeRoot{#1}{#2}}
+}
+
+\newcommand{\drawEdgeTwoLeaf}[2]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawEdgeOneRoot{#1}{#2}}
+    {\drawEdgeLagrangeLeaf{#1}{#2}}
+}
+
+\newcommand{\drawVert}[2]{
+  \tkzDrawPoints[draw=#2,fill=#2,size=4](#1)
+}
+
+\newcommand{\drawVertLagrange}[1]{
+  \tkzDrawPoint[draw=vertdofcolor,fill=vertdofcolor,size=6](#1)
+}
+
+\newcommand{\drawVertLagrangeRoot}[1]{
+  \tkzDrawPoint[diamond,draw=vertdofcolor,fill=vertdofcolor,size=8](#1)
+}
+
+\newcommand{\drawVertLagrangeLeaf}[1]{
+  \tkzDrawPoint[diamond,draw=vertdofcolor,fill=white,size=8,line width=1pt](#1)
+}
+
+\newcommand{\drawVertOne}[1]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawVert{#1}{red!80}}
+    {\drawVertLagrange{#1}}
+}
+
+\newcommand{\drawVertOneRoot}[1]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawVert{#1}{red!40}}
+    {\drawVertLagrangeRoot{#1}}
+}
+
+\newcommand{\drawVertOneLeaf}[1]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawVertTwoRoot{#1}}
+    {\drawVertLagrangeLeaf{#1}}
+}
+
+\newcommand{\drawVertTwo}[1]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawVert{#1}{blue!80}}
+    {\drawVertLagrange{#1}}
+}
+
+\newcommand{\drawVertTwoRoot}[1]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawVert{#1}{blue!40}}
+    {\drawVertLagrangeRoot{#1}}
+}
+
+\newcommand{\drawVertTwoLeaf}[1]{
+  \ifthenelse
+    {\splitMeshFormat = 0}
+    {\drawVertOneRoot{#1}}
+    {\drawVertLagrangeLeaf{#1}}
+}
+
+\tkzSetUpStyle[densely dashed,shorten >=.1cm,shorten <=.1cm,line width=.5]{connector}
+
+\newcommand{\drawSplitMesh}{
+
+\begin{scope}
+  \defMeshOne
+
+  % cells
+  \drawCellOne{p1v0}{p1v1}{p1v4}
+  \drawCellOne{p1v1}{p1v4}{p1v5}
+  \drawCellOne{p1v1}{p1v5}{p1v6}
+  \drawCellOne{p1v1}{p1v2}{p1v6}
+  \drawCellOne{p1v2}{p1v3}{p1v6}
+  \drawCellOne{p1v3}{p1v6}{p1v7}
+  \drawCellOne{p1v4}{p1v8}{p1v9}
+  \drawCellOne{p1v4}{p1v5}{p1v9}
+  \drawCellOne{p1v5}{p1v9}{p1v10}
+  \drawCellOne{p1v5}{p1v6}{p1v10}
+  \drawCellOne{p1v6}{p1v7}{p1v10}
+  \drawCellOne{p1v7}{p1v10}{p1v11}
+  \drawCellOne{p1v8}{p1v9}{p1v12}
+  \drawCellOne{p1v9}{p1v10}{p1v14}
+  \drawCellOne{p1v10}{p1v11}{p1v15}
+
+  % edges
+  \drawEdgeOne{p1v4}{p1v5}
+  \drawEdgeOne{p1v5}{p1v6}
+  \drawEdgeOne{p1v6}{p1v7}
+  \drawEdgeOne{p1v8}{p1v9}
+  \drawEdgeOne{p1v9}{p1v10}
+  \drawEdgeOne{p1v10}{p1v11}
+
+  \drawEdgeOne{p1v0}{p1v4}
+  \drawEdgeOne{p1v4}{p1v8}
+  \drawEdgeOne{p1v1}{p1v5}
+  \drawEdgeOne{p1v5}{p1v9}
+  \drawEdgeOne{p1v2}{p1v6}
+  \drawEdgeOne{p1v6}{p1v10}
+  \drawEdgeOne{p1v3}{p1v7}
+  \drawEdgeOne{p1v7}{p1v11}
+  \drawEdgeOne{p1v11}{p1v15}
+  \drawEdgeOne{p1v8}{p1v12}
+  \drawEdgeOneLeaf{p1v10}{p1v14}
+
+  \drawEdgeOne{p1v1}{p1v4}
+  \drawEdgeOne{p1v1}{p1v6}
+  \drawEdgeOne{p1v3}{p1v6}
+  \drawEdgeOne{p1v4}{p1v9}
+  \drawEdgeOne{p1v5}{p1v10}
+  \drawEdgeOne{p1v7}{p1v10}
+  \drawEdgeOneLeaf{p1v9}{p1v12}
+  \drawEdgeOneLeaf{p1v9}{p1v14}
+  \drawEdgeOneLeaf{p1v10}{p1v15}
+
+  % vertices
+  \drawVertOne{p1v4}
+  \drawVertOne{p1v5}
+  \drawVertOne{p1v6}
+  \drawVertOne{p1v7}
+  \drawVertOne{p1v8}
+  \drawVertOneRoot{p1v9}
+  \drawVertOneRoot{p1v10}
+  \drawVertOne{p1v11}
+  \drawVertOneLeaf{p1v12}
+  \drawVertOneLeaf{p1v14}
+  \drawVertOneLeaf{p1v15}
+
+  % debugging
+  % \tkzLabelPoints[anchor=south,font=\tiny](p1v0,p1v1,p1v2,p1v3,p1v4,p1v5,p1v6,p1v7,p1v8,p1v9,p1v10,p1v11,p1v12,p1v13,p1v14,p1v15)
+
+  % label "core" and "owned"
+  % \node (p1core) [inner sep=0pt,xshift=-20pt,yshift=20pt] at (p1v7) {\footnotesize core};
+  % \node (p1owned) [inner sep=0pt,xshift=-10pt,yshift=20pt] at (p1v11) {\footnotesize owned};
+  % \draw [-{stealth},shorten >=4pt,shorten <=2pt] (p1core.south) -- (p1v7.north);
+  % \draw [-{stealth},shorten >=4pt,shorten <=2pt] (p1owned.south) -- (p1v11.north);
+\end{scope}
+
+\draw [dashed] (3.5,-.4) -- (3.5,3.5);
+
+% process 2
+\begin{scope}[xshift=4cm]
+  \defMeshTwo
+
+  % cells
+  \drawCellTwo{p2v1}{p2v4}{p2v5}
+  \drawCellTwo{p2v1}{p2v5}{p2v6}
+  \drawCellTwo{p2v2}{p2v6}{p2v7}
+  \drawCellTwo{p2v4}{p2v5}{p2v8}
+  \drawCellTwo{p2v5}{p2v8}{p2v9}
+  \drawCellTwo{p2v5}{p2v6}{p2v9}
+  \drawCellTwo{p2v6}{p2v9}{p2v10}
+  \drawCellTwo{p2v6}{p2v10}{p2v11}
+  \drawCellTwo{p2v6}{p2v7}{p2v11}
+  \drawCellTwo{p2v8}{p2v9}{p2v12}
+  \drawCellTwo{p2v9}{p2v12}{p2v13}
+  \drawCellTwo{p2v9}{p2v10}{p2v13}
+  \drawCellTwo{p2v10}{p2v13}{p2v14}
+  \drawCellTwo{p2v10}{p2v14}{p2v15}
+  \drawCellTwo{p2v10}{p2v11}{p2v15}
+
+  % edges
+  \drawEdgeTwo{p2v4}{p2v5}
+  \drawEdgeTwo{p2v5}{p2v6}
+  \drawEdgeTwo{p2v6}{p2v7}
+  \drawEdgeTwo{p2v8}{p2v9}
+  \drawEdgeTwo{p2v9}{p2v10}
+  \drawEdgeTwo{p2v10}{p2v11}
+
+  \drawEdgeTwo{p2v4}{p2v8}
+  \drawEdgeTwo{p2v8}{p2v12}
+  \drawEdgeTwo{p2v1}{p2v5}
+  \drawEdgeTwo{p2v5}{p2v9}
+  \drawEdgeTwo{p2v9}{p2v13}
+  \drawEdgeTwoRoot{p2v2}{p2v6}
+  \drawEdgeTwo{p2v6}{p2v10}
+  \drawEdgeTwo{p2v10}{p2v14}
+  \drawEdgeTwo{p2v7}{p2v11}
+  \drawEdgeTwo{p2v11}{p2v15}
+
+  \drawEdgeTwoRoot{p2v1}{p2v4}
+  \drawEdgeTwoRoot{p2v1}{p2v6}
+  \drawEdgeTwoRoot{p2v2}{p2v7}
+  \drawEdgeTwo{p2v5}{p2v8}
+  \drawEdgeTwo{p2v6}{p2v9}
+  \drawEdgeTwo{p2v6}{p2v11}
+  \drawEdgeTwo{p2v9}{p2v12}
+  \drawEdgeTwo{p2v10}{p2v13}
+  \drawEdgeTwo{p2v10}{p2v15}
+
+  % vertices
+  \drawVertTwo{p2v8}
+  \drawVertTwo{p2v9}
+  \drawVertTwo{p2v10}
+  \drawVertTwo{p2v11}
+  \drawVertTwoRoot{p2v4}
+  \drawVertTwo{p2v5}
+  \drawVertTwoRoot{p2v6}
+  \drawVertTwoRoot{p2v7}
+  \drawVertTwoLeaf{p2v1}
+  \drawVertTwoLeaf{p2v2}
+
+  % label "core" and "owned"
+  % \node (p2core) [inner sep=0pt,xshift=15pt,yshift=20pt] at (p2v11) {\footnotesize core};
+  % \node (p2owned) [inner sep=0pt,xshift=10pt,yshift=20pt] at (p2v7) {\footnotesize owned};
+  % \draw [-{stealth},shorten >=4pt,shorten <=2pt] (p2core.south) -- (p2v11.north);
+  % \draw [-{stealth},shorten >=4pt,shorten <=2pt] (p2owned.south) -- (p2v7.north);
+
+  % debugging
+  % \tkzLabelPoints[anchor=south,font=\tiny](p2v0,p2v1,p2v2,p2v3,p2v4,p2v5,p2v6,p2v7,p2v8,p2v9,p2v10,p2v11,p2v12,p2v13,p2v14,p2v15)
+\end{scope}
+
+}
+
+% connect (sample of) equivalent points
+% \draw [-{stealth},connector,shorten >=4pt,shorten <=4pt] (p1v11) to [bend left=45] (p2v3);
+% \draw [{stealth}-,connector,shorten >=4pt,shorten <=4pt] (p1v15) to [bend left=45] (p2v7);
+% \draw [-{stealth},connector,shorten >=4pt,shorten <=4pt] (p1v8) to [bend right=45] (p2v0);
+% \draw [{stealth}-,connector,shorten >=4pt,shorten <=4pt] (p1v12) to [bend right=45] (p2v4);
+
+% label processes
+% \node (p1name) at (1.5,4.2) {Process 1};
+% \node (p2name) at (6.5,4.2) {Process 2};
+
+\newcommand{\markCell}[2]{
+  \node [circle,fill=white,draw=black,font=\tiny,minimum width=10pt,inner sep=0pt] at (#1) {\textbf{#2}};
+}
+
+\newcommand{\markCore}[1]{
+  \markCell{#1}{C}
+}
+
+\newcommand{\markRoot}[1]{
+  \markCell{#1}{R}
+}
+
+\newcommand{\markLeaf}[1]{
+  \markCell{#1}{L}
+}
