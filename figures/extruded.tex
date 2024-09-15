@@ -1,0 +1,55 @@
+\documentclass[tikz]{standalone}
+\input{figures/common/preamble}
+
+\begin{document}
+\begin{tikzpicture}
+
+% start with 2 base triangles (4 vertices)
+\tkzDefPoint(0,.5){v0v0}
+\tkzDefPoint(2,0){v1v0}
+\tkzDefPoint(1.2,1){v2v0} % this one is invisible
+\tkzDefPoint(3.2,.5){v3v0}
+
+% now figure out the extruded points (3 columns)
+\tkzDefShiftPoint[v0v0](90:1){v0v1}
+\tkzDefShiftPoint[v0v0](90:2){v0v2}
+\tkzDefShiftPoint[v0v0](90:3){v0v3}
+
+\tkzDefShiftPoint[v1v0](90:1){v1v1}
+\tkzDefShiftPoint[v1v0](90:2){v1v2}
+\tkzDefShiftPoint[v1v0](90:3){v1v3}
+
+\tkzDefShiftPoint[v2v0](90:1){v2v1}
+\tkzDefShiftPoint[v2v0](90:2){v2v2}
+\tkzDefShiftPoint[v2v0](90:3){v2v3}
+
+\tkzDefShiftPoint[v3v0](90:1){v3v1}
+\tkzDefShiftPoint[v3v0](90:2){v3v2}
+\tkzDefShiftPoint[v3v0](90:3){v3v3}
+
+% base
+\tkzDrawSegments[red!80,dashed,line width=1](v0v0,v2v0 v1v0,v2v0 v2v0,v3v0)
+
+% draw the vertical lines (v2 is invisible)
+\tkzDrawSegments[line width=1](v0v0,v0v1 v0v1,v0v2 v0v2,v0v3)
+\tkzDrawSegments[line width=1](v1v0,v1v1 v1v1,v1v2 v1v2,v1v3)
+\tkzDrawSegments[dashed,line width=1](v2v0,v2v1 v2v1,v2v2 v2v2,v2v3)
+\tkzDrawSegments[line width=1](v3v0,v3v1 v3v1,v3v2 v3v2,v3v3)
+
+% horizontal (bottom is red)
+\tkzDrawSegments[red!80,line width=1](v0v0,v1v0 v1v0,v3v0)
+\tkzDrawSegments[line width=1](v0v1,v1v1 v1v1,v3v1)
+\tkzDrawSegments[line width=1](v0v2,v1v2 v1v2,v3v2)
+\tkzDrawSegments[line width=1](v0v3,v1v3 v1v3,v3v3)
+
+\tkzDrawSegments[dashed,line width=1](v0v1,v2v1 v1v1,v2v1 v2v1,v3v1)
+\tkzDrawSegments[dashed,line width=1](v0v2,v2v2 v1v2,v2v2 v2v2,v3v2)
+
+\tkzDrawSegments[line width=1](v0v3,v2v3 v2v3,v3v3)
+\tkzDrawSegment[line width=1](v1v3,v2v3)
+
+\tkzDrawPoints[red!80,size=4pt](v0v0,v1v0,v2v0,v3v0)
+\tkzDrawPoints[size=4pt](v0v1,v0v2,v0v3,v1v1,v1v2,v1v3,v2v1,v2v2,v2v3,v3v1,v3v2,v3v3)
+
+\end{tikzpicture}
+\end{document}
