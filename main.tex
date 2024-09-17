@@ -32,10 +32,10 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Mesh stencil calculations}
-  \vspace{-2em}
+\begin{frame}{Mesh stencil calculation example: FEM assembly}
+  \vspace{-1em}
   \begin{center}
-    \includegraphics[scale=.9]{fem_assembly.pdf}
+    \includegraphics[scale=.8]{fem_assembly.pdf}
   \end{center}
 \end{frame}
 
@@ -44,9 +44,9 @@
     \item 
       Writing one assembly loop is easy, writing many is hard.
     \item
-      Changing algorithms and architectures mean that we need to be able to make high-level changes to various aspects of the computation.
+      We want to support a wide range of different discretisations and kernels.
     \item
-      We don't want to write these all by hand. Instead we want to automatically generate fast code.
+      We don't want to write these all by hand. Instead we want to automatically generate fast code from a high-level representation.
   \end{itemize}
 \end{frame}
 
@@ -63,12 +63,13 @@
     \end{minted}
   \end{center}
 
-  \vspace{1em}
+  \vspace{-1em}
 
   \begin{itemize}
     \item Generates, compiles, and executes C code.
     \item Automatically ensures parallel correctness.
-    \item Much faster than a non-code-generated approach.
+    \item Responsible for coordinating FEM assembly in Firedrake (among others).
+    \item All global Firedrake data structures wrap \pyop2 ones.
   \end{itemize}
 \end{frame}
 
@@ -79,7 +80,7 @@
     \item
       It was designed specifically for FEM.
     \item
-      Some important classes of algorithm are not expressible or require non-composable `hacky' solutions.
+      Some important classes of algorithm are not expressible or require non-composable `hacky' solutions (e.g. SLATE, PatchPC).
   \end{itemize}
 \end{frame}
 
@@ -164,10 +165,10 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{Flexible data layouts}
+\begin{frame}{Alternative data layouts}
   \begin{itemize}
     \item
-      \pyop3 can freely swap around tree nodes (axes) to give different, equivalent, data layouts.
+      \pyop3 can freely swap around parts of the tree to give different, equivalent, data layouts.
     \item
       It is very similar to AoS/SoA optimisations.
   \end{itemize}
@@ -177,48 +178,29 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Impact on Firedrake}
+\begin{frame}{Impact on Firedrake users/developers}
   \begin{itemize}
     \item
-      Hopefully extremely minimal. The top-level API is unchanged.
+      Hopefully extremely minimal.
+    \item The top-level API is unchanged.
     \item
-      If you are frequently interacting directly with the arrays (i.e. \pycode{function.dat.data}) then you \emph{may} notice changes.
+      Code performance should be largely the same.
     \item
       Obviously any \pyop2 code will need porting.
     \item
-      Code performance should be unchanged.
+      If you are frequently interacting directly with the arrays (i.e. \pycode{function.dat.data}) then you \emph{may} notice changes.
   \end{itemize}
 \end{frame}
-
-\begin{frame}{Additional benefits}
-  \begin{itemize}
-    \item
-      `Easy' to implement new preconditioners: SLATE (hybridisation) and PatchPC (additive Schwartz) are expressible by \pyop3.
-    \item
-      Can generate the transformation code necessary for arbitrary mesh entity orientations.
-    \item Support for monolithic assembly of matrices containing Real blocks (incidental).
-  \end{itemize}
-
-  \vspace{1em}
-
-  More speculative:
-
-  \begin{itemize}
-    \item Structured meshes
-    \item $hp$-adaptivity
-    \item Low-level compiler optimisations (e.g. loop fusion)
-  \end{itemize}
-\end{frame}
-
 
 \begin{frame}{Farewell extruded mesh}
+      \vspace{-2em}
   \begin{columns}
-    \begin{column}{.5\textwidth}
+    \begin{column}{.3\textwidth}
       \begin{center}
-        \includegraphics[width=.6\textwidth]{extruded.pdf}
+        \includegraphics[width=\textwidth]{extruded.pdf}
       \end{center}
     \end{column}
-    \begin{column}{.5\textwidth}
+    \begin{column}{.69\textwidth}
       Fast for 2 reasons:
       \begin{enumerate}
         \item Regular data layout
@@ -231,14 +213,35 @@
 
       \begin{itemize}
         \item
-          It turns out that (2) \emph{is not very important}.
-
+          It turns out that (2) is not very important.
         \item
           An extruded mesh will just be a PETSc DMPlex.
           Lots of code can be simplified.
+        \item
+          Again, Firedrake users should not notice anything different.
       \end{itemize}
     \end{column}
   \end{columns}
+\end{frame}
+
+
+\begin{frame}{Additional benefits}
+  \begin{itemize}
+    \item
+      `Easy' to implement new preconditioners: SLATE (hybridisation) and PatchPC (additive Schwartz) are expressible in \pyop3.
+    \item
+      Can generate the transformation code necessary for arbitrary mesh entity orientations.
+    \item Support for monolithic assembly of matrices (i.e. \pycode{"mataij"}) containing Real blocks (incidental).
+  \end{itemize}
+
+  More speculative:
+
+  \begin{itemize}
+    \item Structured meshes
+    \item $hp$-adaptivity
+    \item Low-level compiler optimisations (e.g. loop fusion)
+    \item And more...
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Summary}
